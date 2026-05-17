@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   ControlsHelpHelp,
   GameBoardPlay,
@@ -11,7 +11,6 @@ import { useAppState } from './hooks/useAppState';
 
 export default function App() {
   const { state, actions } = useAppState();
-  const [screenNotice, setScreenNotice] = useState<string | null>(null);
 
   useEffect(() => {
     globalThis.app = { state, actions };
@@ -21,6 +20,22 @@ export default function App() {
   }, [state, actions]);
 
   useEffect(() => {
+    if (state.currentScreen === 'pause') {
+      const handlePausedKeyDown = (event: KeyboardEvent) => {
+        if (event.defaultPrevented || event.metaKey || event.altKey || event.ctrlKey) {
+          return;
+        }
+
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          actions.resumeGame();
+        }
+      };
+
+      window.addEventListener('keydown', handlePausedKeyDown);
+      return () => window.removeEventListener('keydown', handlePausedKeyDown);
+    }
+
     if (state.currentScreen !== 'play' || state.isPaused || state.isGameOver) {
       return undefined;
     }
@@ -75,6 +90,7 @@ export default function App() {
   }, [
     actions.moveActiveCell,
     actions.pauseGame,
+    actions.resumeGame,
     actions.selectCell,
     state.activeCellId,
     state.currentScreen,
@@ -106,10 +122,7 @@ export default function App() {
   };
 
   const settingsActions = {
-    'button-1-1': () => {
-      actions.openSettings();
-      setScreenNotice('Settings panel active');
-    },
+    'button-1-1': actions.openSettings,
     'button-2-2': actions.openHelp,
     'execute-purge-3': actions.purgeProgress,
     'abort-4': actions.closeSettings,
@@ -200,28 +213,27 @@ export default function App() {
           {state.lastError}
         </div>
       )}
-      {screenNotice && (
-        <div
-          role="status"
-          aria-live="polite"
-          data-setfarm-screen-notice="true"
-          className="fixed bottom-4 right-4 z-50 max-w-[calc(100vw-2rem)] rounded border border-cyan-300/50 bg-slate-950/90 px-4 py-3 text-sm leading-6 text-cyan-50 shadow-lg shadow-cyan-950/30"
-        >
-          {screenNotice}
-        </div>
-      )}
-      {state.currentScreen === 'settings' && (
-        <GameOptionsSettings
-          actions={settingsActions}
-          difficulty={state.difficulty}
-          options={state.options}
-          setDifficulty={actions.setDifficulty}
-          updateOptions={actions.updateOptions}
+      {state.currentScreen === 'settings' && <GameOptionsSettings actions={settingsActions} />}
+      {state.currentScreen === 'help' && <ControlsHelpHelp actions={helpActions} />}
+      {state.currentScreen === 'pause' && (
+        <PauseOverlayOverlay
+          actions={pauseActions}
+          level={state.level}
+          score={state.score}
+          moves={state.moves}
         />
       )}
-      {state.currentScreen === 'help' && <ControlsHelpHelp actions={helpActions} />}
-      {state.currentScreen === 'pause' && <PauseOverlayOverlay actions={pauseActions} />}
-      {state.currentScreen === 'gameOver' && <GameOverResult actions={gameOverActions} />}
+      {state.currentScreen === 'gameOver' && (
+        <GameOverResult
+          actions={gameOverActions}
+          score={state.score}
+          moves={state.moves}
+          bestScore={state.bestScore}
+          nodesConnected={clearedCount}
+          totalNodes={state.grid.length}
+          elapsedTicks={state.tick}
+        />
+      )}
     </div>
   );
 }
