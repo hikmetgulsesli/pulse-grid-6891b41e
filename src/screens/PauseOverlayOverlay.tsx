@@ -14,9 +14,12 @@ export type PauseOverlayOverlayActionId = "resume-1" | "restart-level-2" | "retu
 
 export interface PauseOverlayOverlayProps {
   actions?: Partial<Record<PauseOverlayOverlayActionId, () => void>>;
+  level?: number;
+  score?: number;
+  moves?: number;
 }
 
-export function PauseOverlayOverlay({ actions }: PauseOverlayOverlayProps) {
+export function PauseOverlayOverlay({ actions, level = 1, score = 0, moves = 0 }: PauseOverlayOverlayProps) {
   return (
     <>
       {/* Faint Background Game Board (Simulated) */}
@@ -50,7 +53,7 @@ export function PauseOverlayOverlay({ actions }: PauseOverlayOverlayProps) {
       <h2 className="text-headline-lg font-headline-lg text-primary uppercase tracking-widest">PAUSED</h2>
       <div className="mt-2 text-label-sm font-label-sm text-on-surface-variant flex items-center justify-center gap-2">
       <span className="w-2 h-2 bg-secondary rounded-full inline-block animate-pulse"></span>
-      <span>SIGNAL INTERRUPTED</span>
+      <span>LEVEL {level} | SCORE {score} | MOVES {moves}</span>
       </div>
       </div>
       {/* Buttons */}
