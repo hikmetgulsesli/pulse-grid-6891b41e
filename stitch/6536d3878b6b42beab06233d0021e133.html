@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pulse Grid - System Restored</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#31394d",
+                    "surface-container-highest": "#2d3449",
+                    "primary-fixed": "#6bff8f",
+                    "on-tertiary-fixed": "#2a1700",
+                    "surface": "#0b1326",
+                    "surface-container-high": "#222a3d",
+                    "primary": "#4be277",
+                    "tertiary-fixed": "#ffddb8",
+                    "surface-dim": "#0b1326",
+                    "on-primary-fixed": "#002109",
+                    "surface-container-lowest": "#060e20",
+                    "on-primary": "#003915",
+                    "secondary-container": "#b50036",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "surface-container": "#171f33",
+                    "inverse-primary": "#006e2f",
+                    "background": "#0b1326",
+                    "secondary-fixed": "#ffdadb",
+                    "secondary": "#ffb2b7",
+                    "surface-tint": "#4ae176",
+                    "outline-variant": "#3d4a3d",
+                    "on-secondary-fixed-variant": "#92002a",
+                    "on-secondary-fixed": "#40000d",
+                    "inverse-on-surface": "#283044",
+                    "secondary-fixed-dim": "#ffb2b7",
+                    "tertiary-container": "#ef9900",
+                    "on-error": "#690005",
+                    "on-tertiary": "#472a00",
+                    "tertiary": "#ffba61",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-low": "#131b2e",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "error-container": "#93000a",
+                    "on-primary-fixed-variant": "#005321",
+                    "on-tertiary-container": "#5c3800",
+                    "error": "#ffb4ab",
+                    "on-primary-container": "#004b1e",
+                    "on-secondary-container": "#ffc2c4",
+                    "inverse-surface": "#dae2fd",
+                    "on-surface": "#dae2fd",
+                    "on-background": "#dae2fd",
+                    "surface-variant": "#2d3449",
+                    "on-surface-variant": "#bccbb9",
+                    "primary-container": "#22c55e",
+                    "outline": "#869585",
+                    "on-secondary": "#67001b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "unit": "4px",
+                    "touch-target-min": "44px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "data-lg": ["JetBrains Mono"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "data-md": ["JetBrains Mono"],
+                    "headline-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "data-lg": ["24px", { "lineHeight": "24px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                    "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                    "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                    "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                    "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                    "data-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                    "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop overflow-hidden relative font-body-md">
+<!-- Glitchy Background Layer -->
+<div aria-hidden="true" class="absolute inset-0 z-0 opacity-20 pointer-events-none flex flex-wrap gap-gutter p-gutter content-start justify-center">
+<!-- Faux grid nodes -->
+<div class="w-16 h-16 border border-primary bg-primary/10"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+<div class="w-16 h-16 border border-primary bg-primary/5"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+<div class="w-16 h-16 border border-outline-variant translate-y-2 translate-x-1"></div>
+<div class="w-16 h-16 border border-primary bg-primary/20"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+<div class="w-16 h-16 border border-primary bg-primary/10 -translate-y-1"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+<div class="w-16 h-16 border border-primary bg-primary/5"></div>
+<div class="w-16 h-16 border border-outline-variant"></div>
+</div>
+<!-- Main Result Panel -->
+<main class="relative z-10 w-full max-w-[600px] bg-surface border border-outline-variant shadow-[0_0_30px_rgba(75,226,119,0.05)] p-6 md:p-10 flex flex-col items-center text-center">
+<!-- Status Indicator -->
+<div class="w-16 h-16 rounded-full border-2 border-primary bg-primary/10 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(75,226,119,0.2)]">
+<span class="material-symbols-outlined text-primary text-[32px]">check_circle</span>
+</div>
+<!-- Headline -->
+<h1 class="text-primary text-headline-lg font-headline-lg uppercase tracking-widest mb-2">
+            System Restored
+        </h1>
+<p class="text-on-surface-variant text-body-md font-body-md mb-8">
+            Signal integrity stabilized across all sectors.
+        </p>
+<!-- High Score Chip -->
+<div class="bg-tertiary-container border border-tertiary text-on-tertiary-container font-label-sm text-label-sm px-4 py-1 rounded-full uppercase tracking-widest mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+            New High Score!
+        </div>
+<!-- Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-unit w-full mb-10">
+<!-- Score Block (Full Width) -->
+<div class="md:col-span-2 bg-surface-container border border-outline-variant p-6 flex flex-col items-center justify-center">
+<span class="text-on-surface-variant text-label-sm font-label-sm uppercase tracking-widest mb-2">Final Score</span>
+<span class="text-on-surface text-headline-lg font-data-lg text-[40px] leading-none text-primary-fixed">4,800</span>
+</div>
+<!-- Time Block -->
+<div class="bg-surface-container border border-outline-variant p-4 flex flex-col items-center justify-center">
+<span class="text-on-surface-variant text-label-sm font-label-sm uppercase tracking-widest mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Time
+                </span>
+<span class="text-on-surface text-data-lg font-data-lg">05:12</span>
+</div>
+<!-- Nodes Block -->
+<div class="bg-surface-container border border-outline-variant p-4 flex flex-col items-center justify-center">
+<span class="text-on-surface-variant text-label-sm font-label-sm uppercase tracking-widest mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">hub</span> Nodes Connected
+                </span>
+<span class="text-on-surface text-data-lg font-data-lg">64</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col md:flex-row w-full gap-4">
+<button class="flex-1 h-touch-target-min bg-surface border border-outline-variant text-on-surface font-label-sm text-label-sm uppercase tracking-widest hover:bg-surface-container hover:border-outline transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">menu</span>
+                Main Menu
+            </button>
+<button class="flex-1 h-touch-target-min bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary-fixed transition-colors border border-transparent hover:border-primary-fixed flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(75,226,119,0.3)]">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+                Play Again
+            </button>
+</div>
+</main>
+</body></html>

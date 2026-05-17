@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Controls Help - Pulse Grid</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#31394d",
+                        "surface-container-highest": "#2d3449",
+                        "primary-fixed": "#6bff8f",
+                        "on-tertiary-fixed": "#2a1700",
+                        "surface": "#0b1326",
+                        "surface-container-high": "#222a3d",
+                        "primary": "#4be277",
+                        "tertiary-fixed": "#ffddb8",
+                        "surface-dim": "#0b1326",
+                        "on-primary-fixed": "#002109",
+                        "surface-container-lowest": "#060e20",
+                        "on-primary": "#003915",
+                        "secondary-container": "#b50036",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-container": "#171f33",
+                        "inverse-primary": "#006e2f",
+                        "background": "#0b1326",
+                        "secondary-fixed": "#ffdadb",
+                        "secondary": "#ffb2b7",
+                        "surface-tint": "#4ae176",
+                        "outline-variant": "#3d4a3d",
+                        "on-secondary-fixed-variant": "#92002a",
+                        "on-secondary-fixed": "#40000d",
+                        "inverse-on-surface": "#283044",
+                        "secondary-fixed-dim": "#ffb2b7",
+                        "tertiary-container": "#ef9900",
+                        "on-error": "#690005",
+                        "on-tertiary": "#472a00",
+                        "tertiary": "#ffba61",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#131b2e",
+                        "primary-fixed-dim": "#4ae176",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "error-container": "#93000a",
+                        "on-primary-fixed-variant": "#005321",
+                        "on-tertiary-container": "#5c3800",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#004b1e",
+                        "on-secondary-container": "#ffc2c4",
+                        "inverse-surface": "#dae2fd",
+                        "on-surface": "#dae2fd",
+                        "on-background": "#dae2fd",
+                        "surface-variant": "#2d3449",
+                        "on-surface-variant": "#bccbb9",
+                        "primary-container": "#22c55e",
+                        "outline": "#869585",
+                        "on-secondary": "#67001b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "unit": "4px",
+                        "touch-target-min": "44px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "data-lg": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-md": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-lg": ["24px", { "lineHeight": "24px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation (Shell suppressed based on task focus, but header provided for structure) -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-touch-target-min">
+<div class="text-headline-lg font-headline-lg font-bold tracking-tighter text-primary">
+            PULSE_GRID
+        </div>
+<div class="flex items-center gap-4">
+<button aria-label="Close" class="text-on-surface-variant hover:bg-surface-container-high hover:text-primary-fixed p-2 rounded-DEFAULT transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto px-margin-mobile md:px-margin-desktop py-8 max-w-5xl mx-auto w-full">
+<!-- Header -->
+<div class="mb-12">
+<h1 class="text-headline-lg font-headline-lg text-on-surface mb-2 border-l-4 border-primary pl-4">System Manual</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Controls &amp; Directives</p>
+</div>
+<!-- Rules Section (Neo-Brutalist Callout) -->
+<section class="mb-12 bg-surface-container-high border border-outline-variant p-6 rounded-DEFAULT shadow-[0_0_15px_rgba(75,226,119,0.1)] relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary group-hover:shadow-[0_0_10px_rgba(75,226,119,0.8)] transition-shadow"></div>
+<h2 class="text-headline-md font-headline-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">rule</span>
+                Primary Directive
+            </h2>
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary mt-1">bolt</span>
+<p class="text-body-lg font-body-lg text-on-surface">Connect the Pulse from <span class="text-primary font-bold">Source</span> to <span class="text-secondary font-bold">Sink</span>.</p>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-error mt-1">warning</span>
+<p class="text-body-lg font-body-lg text-on-surface">Avoid Overloads. Crossing incompatible signals results in system failure.</p>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed mt-1">trending_up</span>
+<p class="text-body-lg font-body-lg text-on-surface">Maximize Signal Strength for higher bandwidth scores.</p>
+</div>
+</div>
+</section>
+<!-- Controls Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-12">
+<!-- Keyboard Controls -->
+<section class="bg-surface-container border border-outline-variant rounded-DEFAULT p-6">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-6 flex items-center gap-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-on-surface-variant">keyboard</span>
+                    Keyboard Interface
+                </h2>
+<ul class="space-y-6">
+<li class="flex items-center justify-between">
+<span class="text-body-lg font-body-lg text-on-surface-variant">Navigation</span>
+<div class="flex gap-2">
+<span class="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">W</span>
+<span class="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">A</span>
+<span class="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">S</span>
+<span class="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">D</span>
+</div>
+</li>
+<li class="flex items-center justify-between">
+<span class="text-body-lg font-body-lg text-on-surface-variant">Rotate Node / Action</span>
+<span class="inline-flex items-center justify-center px-4 h-10 border border-primary bg-primary/10 text-primary text-data-md font-data-md rounded-DEFAULT shadow-[0_0_8px_rgba(75,226,119,0.3)]">SPACE</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="text-body-lg font-body-lg text-on-surface-variant">System Pause</span>
+<span class="inline-flex items-center justify-center px-3 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">ESC</span>
+</li>
+</ul>
+</section>
+<!-- Touch/Mouse Controls -->
+<section class="bg-surface-container border border-outline-variant rounded-DEFAULT p-6">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-6 flex items-center gap-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-on-surface-variant">touch_app</span>
+                    Tactile &amp; Optic Interface
+                </h2>
+<ul class="space-y-6">
+<li class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full border border-primary bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">ads_click</span>
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-1">Click / Tap</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Select and rotate a transmission node 90 degrees clockwise.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full border border-outline-variant bg-surface-bright flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface">swipe</span>
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-1">Drag</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Move the main signal viewpoint across the grid lattice.</p>
+</div>
+</li>
+</ul>
+</section>
+</div>
+<!-- Action Area -->
+<div class="flex justify-center mt-12">
+<button class="bg-surface text-on-surface border border-outline-variant px-8 py-3 rounded-DEFAULT font-data-lg text-data-lg hover:bg-primary hover:text-on-primary hover:border-primary transition-colors flex items-center gap-2 h-touch-target-min">
+<span class="material-symbols-outlined">arrow_back</span>
+                RETURN TO GRID
+            </button>
+</div>
+</main>
+</body></html>

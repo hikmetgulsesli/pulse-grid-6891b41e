@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pulse Grid - Paused</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#31394d",
+                        "surface-container-highest": "#2d3449",
+                        "primary-fixed": "#6bff8f",
+                        "on-tertiary-fixed": "#2a1700",
+                        "surface": "#0b1326",
+                        "surface-container-high": "#222a3d",
+                        "primary": "#4be277",
+                        "tertiary-fixed": "#ffddb8",
+                        "surface-dim": "#0b1326",
+                        "on-primary-fixed": "#002109",
+                        "surface-container-lowest": "#060e20",
+                        "on-primary": "#003915",
+                        "secondary-container": "#b50036",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-container": "#171f33",
+                        "inverse-primary": "#006e2f",
+                        "background": "#0b1326",
+                        "secondary-fixed": "#ffdadb",
+                        "secondary": "#ffb2b7",
+                        "surface-tint": "#4ae176",
+                        "outline-variant": "#3d4a3d",
+                        "on-secondary-fixed-variant": "#92002a",
+                        "on-secondary-fixed": "#40000d",
+                        "inverse-on-surface": "#283044",
+                        "secondary-fixed-dim": "#ffb2b7",
+                        "tertiary-container": "#ef9900",
+                        "on-error": "#690005",
+                        "on-tertiary": "#472a00",
+                        "tertiary": "#ffba61",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#131b2e",
+                        "primary-fixed-dim": "#4ae176",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "error-container": "#93000a",
+                        "on-primary-fixed-variant": "#005321",
+                        "on-tertiary-container": "#5c3800",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#004b1e",
+                        "on-secondary-container": "#ffc2c4",
+                        "inverse-surface": "#dae2fd",
+                        "on-surface": "#dae2fd",
+                        "on-background": "#dae2fd",
+                        "surface-variant": "#2d3449",
+                        "on-surface-variant": "#bccbb9",
+                        "primary-container": "#22c55e",
+                        "outline": "#869585",
+                        "on-secondary": "#67001b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "unit": "4px",
+                        "touch-target-min": "44px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "data-lg": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-md": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-lg": ["24px", { "lineHeight": "24px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background h-screen w-full overflow-hidden relative font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Faint Background Game Board (Simulated) -->
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at center, #171f33 2px, transparent 2px); background-size: 32px 32px;">
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 border border-outline-variant grid grid-cols-4 grid-rows-4 gap-gutter p-gutter">
+<!-- Simulated grid nodes -->
+<div class="border border-outline-variant rounded-DEFAULT"></div>
+<div class="border border-outline-variant rounded-DEFAULT bg-surface-container-high"></div>
+<div class="border border-outline-variant rounded-DEFAULT"></div>
+<div class="border border-outline-variant rounded-DEFAULT bg-surface-container-high"></div>
+<div class="border border-outline-variant rounded-DEFAULT bg-surface-container-high"></div>
+<div class="border border-outline-variant rounded-DEFAULT border-primary"></div>
+<div class="border border-outline-variant rounded-DEFAULT"></div>
+<div class="border border-outline-variant rounded-DEFAULT"></div>
+<div class="border border-outline-variant rounded-DEFAULT"></div>
+<div class="border border-outline-variant rounded-DEFAULT"></div>
+<div class="border border-outline-variant rounded-DEFAULT bg-surface-container-high"></div>
+<div class="border border-outline-variant rounded-DEFAULT border-secondary"></div>
+<div class="border border-outline-variant rounded-DEFAULT bg-surface-container-high"></div>
+<div class="border border-outline-variant rounded-DEFAULT"></div>
+<div class="border border-outline-variant rounded-DEFAULT border-primary"></div>
+<div class="border border-outline-variant rounded-DEFAULT"></div>
+</div>
+</div>
+<!-- Pause Overlay -->
+<div class="absolute inset-0 z-50 bg-background/80 backdrop-blur-sm flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop">
+<!-- Central Menu Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-8 w-full max-w-sm shadow-[0_0_15px_rgba(75,226,119,0.1)]">
+<!-- Title -->
+<div class="text-center mb-8 border-b border-outline-variant pb-4">
+<h2 class="text-headline-lg font-headline-lg text-primary uppercase tracking-widest">PAUSED</h2>
+<div class="mt-2 text-label-sm font-label-sm text-on-surface-variant flex items-center justify-center gap-2">
+<span class="w-2 h-2 bg-secondary rounded-full inline-block animate-pulse"></span>
+<span>SIGNAL INTERRUPTED</span>
+</div>
+</div>
+<!-- Buttons -->
+<div class="flex flex-col gap-4">
+<!-- Resume Button (Primary) -->
+<button class="h-touch-target-min w-full bg-surface-container-lowest border border-primary text-primary font-data-md text-data-md flex items-center justify-center gap-2 hover:bg-primary hover:text-on-primary transition-colors duration-150 rounded-DEFAULT shadow-[0_0_8px_rgba(75,226,119,0.2)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                    Resume
+                </button>
+<!-- Restart Level Button -->
+<button class="h-touch-target-min w-full bg-surface border border-outline-variant text-on-surface font-data-md text-data-md flex items-center justify-center gap-2 hover:border-outline hover:bg-surface-container transition-colors duration-150 rounded-DEFAULT">
+<span class="material-symbols-outlined">refresh</span>
+                    Restart Level
+                </button>
+<!-- Return to Main Menu Button -->
+<button class="h-touch-target-min w-full bg-surface border border-outline-variant text-on-surface font-data-md text-data-md flex items-center justify-center gap-2 hover:border-outline hover:bg-surface-container transition-colors duration-150 rounded-DEFAULT">
+<span class="material-symbols-outlined">grid_view</span>
+                    Return to Main Menu
+                </button>
+</div>
+<!-- Visual Hint -->
+<div class="mt-8 text-center">
+<p class="text-label-sm font-label-sm text-on-surface-variant opacity-70">
+<span class="inline-block border border-outline-variant rounded-sm px-1 py-0.5 bg-surface-container mr-1 text-on-surface">ESC</span> to Resume
+                </p>
+</div>
+</div>
+</div>
+</body></html>

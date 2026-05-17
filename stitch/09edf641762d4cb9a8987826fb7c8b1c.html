@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pulse Grid - Game Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#31394d",
+                    "surface-container-highest": "#2d3449",
+                    "primary-fixed": "#6bff8f",
+                    "on-tertiary-fixed": "#2a1700",
+                    "surface": "#0b1326",
+                    "surface-container-high": "#222a3d",
+                    "primary": "#4be277",
+                    "tertiary-fixed": "#ffddb8",
+                    "surface-dim": "#0b1326",
+                    "on-primary-fixed": "#002109",
+                    "surface-container-lowest": "#060e20",
+                    "on-primary": "#003915",
+                    "secondary-container": "#b50036",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "surface-container": "#171f33",
+                    "inverse-primary": "#006e2f",
+                    "background": "#0b1326",
+                    "secondary-fixed": "#ffdadb",
+                    "secondary": "#ffb2b7",
+                    "surface-tint": "#4ae176",
+                    "outline-variant": "#3d4a3d",
+                    "on-secondary-fixed-variant": "#92002a",
+                    "on-secondary-fixed": "#40000d",
+                    "inverse-on-surface": "#283044",
+                    "secondary-fixed-dim": "#ffb2b7",
+                    "tertiary-container": "#ef9900",
+                    "on-error": "#690005",
+                    "on-tertiary": "#472a00",
+                    "tertiary": "#ffba61",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-low": "#131b2e",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "error-container": "#93000a",
+                    "on-primary-fixed-variant": "#005321",
+                    "on-tertiary-container": "#5c3800",
+                    "error": "#ffb4ab",
+                    "on-primary-container": "#004b1e",
+                    "on-secondary-container": "#ffc2c4",
+                    "inverse-surface": "#dae2fd",
+                    "on-surface": "#dae2fd",
+                    "on-background": "#dae2fd",
+                    "surface-variant": "#2d3449",
+                    "on-surface-variant": "#bccbb9",
+                    "primary-container": "#22c55e",
+                    "outline": "#869585",
+                    "on-secondary": "#67001b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "unit": "4px",
+                    "touch-target-min": "44px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "data-lg": [
+                            "JetBrains Mono"
+                    ],
+                    "body-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-sm": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "data-md": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-lg": [
+                            "Hanken Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "data-lg": [
+                            "24px",
+                            {
+                                    "lineHeight": "24px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "data-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="hidden md:flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-touch-target-min bg-surface border-b border-outline-variant z-50 fixed top-0">
+<div class="text-headline-lg font-headline-lg font-bold tracking-tighter text-primary">PULSE_GRID</div>
+<div class="flex space-x-6 items-center">
+<button class="text-primary font-bold hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75">Board</button>
+<button class="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75">Menu</button>
+<button class="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75">Options</button>
+</div>
+<div class="flex items-center space-x-4 text-primary">
+<button class="hover:bg-surface-container-high hover:text-primary-fixed p-2 rounded-full transition-colors duration-75">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="hover:bg-surface-container-high hover:text-primary-fixed p-2 rounded-full transition-colors duration-75">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<!-- Main Game Area -->
+<main class="flex-grow flex flex-col md:flex-row mt-[44px] md:mt-touch-target-min mb-16 md:mb-0 p-margin-mobile md:p-margin-desktop gap-gutter">
+<!-- HUD Sidebar (Desktop) / Top Section (Mobile) -->
+<aside class="flex flex-col gap-unit w-full md:w-64 flex-shrink-0">
+<!-- HUD Panel -->
+<div class="bg-surface-container border border-outline-variant rounded p-4 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest">Score</span>
+<span class="text-data-lg font-data-lg text-primary">1,250</span>
+</div>
+<div class="w-full h-px bg-outline-variant"></div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest">Time</span>
+<span class="text-data-lg font-data-lg text-tertiary">02:45</span>
+</div>
+<div class="w-full h-px bg-outline-variant"></div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest">Level</span>
+<span class="text-data-lg font-data-lg text-on-surface">4/10</span>
+</div>
+</div>
+<!-- Status Message -->
+<div class="bg-surface-container-highest border border-primary-container/30 rounded p-4 mt-4">
+<p class="text-data-md font-data-md text-primary-fixed animate-pulse">
+                    &gt; Signal established.<br/>
+                    &gt; Routing to node Alpha...
+                </p>
+</div>
+<!-- Controls -->
+<div class="flex flex-col gap-2 mt-auto pt-8">
+<button class="flex items-center justify-center gap-2 w-full h-touch-target-min bg-surface border border-outline-variant text-on-surface hover:bg-primary hover:text-on-primary-fixed font-label-sm text-label-sm rounded uppercase tracking-wider transition-colors">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+                    Pause
+                </button>
+<button class="flex items-center justify-center gap-2 w-full h-touch-target-min bg-surface border border-error/50 text-error hover:bg-error hover:text-on-error font-label-sm text-label-sm rounded uppercase tracking-wider transition-colors">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+                    Reset Level
+                </button>
+</div>
+</aside>
+<!-- Game Board Container -->
+<section class="flex-grow flex items-center justify-center bg-surface-container-lowest border border-outline-variant rounded relative overflow-hidden min-h-[400px]">
+<!-- Decorative grid background -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#3d4a3d 1px, transparent 1px); background-size: 32px 32px;"></div>
+<!-- The 8x8 Grid -->
+<div class="grid grid-cols-8 gap-unit p-gutter relative z-10 bg-surface border border-outline-variant rounded">
+<!-- Example Row 1 -->
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-primary bg-primary/10 rounded-sm flex items-center justify-center shadow-[0_0_8px_rgba(34,197,94,0.3)]">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-primary bg-primary/10 rounded-sm flex items-center justify-center relative">
+<!-- Path connecting left to right -->
+<div class="absolute top-1/2 left-0 w-full h-1 bg-primary -translate-y-1/2"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border-2 border-primary bg-primary/20 rounded-sm flex items-center justify-center relative shadow-[0_0_12px_rgba(34,197,94,0.5)]">
+<!-- Active/Selected Node -->
+<div class="w-4 h-4 bg-primary rounded-sm animate-pulse"></div>
+<div class="absolute top-1/2 left-0 w-1/2 h-1 bg-primary -translate-y-1/2"></div>
+<div class="absolute top-1/2 left-1/2 w-1 h-1/2 bg-primary -translate-x-1/2"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<!-- Example Row 2 -->
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-primary bg-primary/10 rounded-sm flex items-center justify-center relative">
+<!-- Path connecting top to bottom -->
+<div class="absolute top-0 left-1/2 w-1 h-full bg-primary -translate-x-1/2"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<!-- Example Row 3 -->
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm flex items-center justify-center">
+<div class="w-2 h-2 bg-outline-variant rounded-full"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm relative">
+<div class="absolute top-1/2 left-0 w-full h-1 bg-outline-variant -translate-y-1/2"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm relative">
+<div class="absolute top-1/2 left-0 w-full h-1 bg-outline-variant -translate-y-1/2"></div>
+<div class="absolute top-1/2 left-1/2 w-1 h-1/2 bg-outline-variant -translate-x-1/2"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-primary bg-primary/10 rounded-sm flex items-center justify-center relative">
+<div class="absolute top-0 left-1/2 w-1 h-1/2 bg-primary -translate-x-1/2"></div>
+<div class="absolute top-1/2 left-1/2 w-1/2 h-1 bg-primary -translate-y-1/2"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-primary bg-primary/10 rounded-sm flex items-center justify-center relative">
+<div class="absolute top-1/2 left-0 w-full h-1 bg-primary -translate-y-1/2"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-primary bg-primary/10 rounded-sm flex items-center justify-center relative">
+<div class="absolute top-1/2 left-0 w-1/2 h-1 bg-primary -translate-y-1/2"></div>
+<div class="w-3 h-3 bg-primary rounded-sm rotate-45"></div> <!-- Target Node -->
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<!-- Fill remaining 5 rows with mostly empty/inactive nodes for visual structure -->
+<!-- Row 4 -->
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm relative">
+<div class="absolute top-0 left-1/2 w-1 h-full bg-outline-variant -translate-x-1/2"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<!-- Row 5 -->
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm relative flex items-center justify-center">
+<div class="absolute top-0 left-1/2 w-1 h-1/2 bg-outline-variant -translate-x-1/2"></div>
+<div class="w-2 h-2 bg-outline-variant rounded-full"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm flex items-center justify-center">
+<div class="w-2 h-2 bg-outline-variant rounded-full"></div>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<!-- Row 6 -->
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<!-- Row 7 -->
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant text-[16px]">lock</span>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<!-- Row 8 -->
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+<div class="w-10 h-10 md:w-12 md:h-12 border border-outline-variant bg-surface-container rounded-sm"></div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden flex justify-around items-center w-full h-16 bg-surface-container-lowest border-t border-outline-variant fixed bottom-0 z-50">
+<a class="flex flex-col items-center justify-center text-primary-fixed bg-surface-container-highest rounded-xl px-4 py-1 translate-y-0.5 duration-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-label-sm font-label-sm">Board</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined">menu</span>
+<span class="text-label-sm font-label-sm">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="text-label-sm font-label-sm">Options</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined">question_mark</span>
+<span class="text-label-sm font-label-sm">Help</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,70 @@
+Generate exactly 6 separate DESKTOP screens for "Pulse Grid PRD" in one Stitch batch call.
+
+Screen titles must match exactly:
+1. Game Board (play) - Playable main scene with the playfield, user-controlled entities, score/progress, status, and primary controls.
+2. Main Menu (menu) - Start, resume, restart, and any task-requested mode or difficulty actions.
+3. Pause Overlay (overlay) - Paused state with resume, restart, and return-to-menu actions.
+4. Game Over (result) - Final score/progress summary, replay, and return-to-menu actions.
+5. Controls Help (help) - Task-requested keyboard/touch controls and concise rules.
+6. Game Options (settings) - Task-requested settings such as audio, difficulty, speed, controls, or preferences.
+
+Application summary:
+# Pulse Grid PRD
+
+## Overview
+Pulse Grid turns the user's request into a directly usable application. The first screen is not a landing page; it is the real workflow surface where the user can inspect data, take actions, and recover from empty or error states. User-facing copy language: English. Pipeline metadata, story titles, component identifiers, and technical reports remain English.
+
+## Goals
+- Provide a working first-load playable game surface, not a landing page or generic dashboard.
+- Ensure Start, Pause, Resume, Restart, keyboard/touch controls, and game-over actions visibly change the game state.
+- Keep gameplay state single-sourced so score/progress, playfield entities, status/HUD, pause, and game-over UI cannot drift.
+- Avoid text overflow, incoherent overlap, dead controls, and broken mobile controls on desktop and mobile.
+- Expose deterministic game state so smoke, final-test, and deploy gates can verify actual post-click and post-keyboard behavior.
+
+## Technical Decisions
+- Framework: React 18 + Vite + TypeScript.
+- Styling: Tailwind CSS or plain CSS modules with stable board sizing, clear status panels, and responsive controls.
+- State: React state plus reducer/context; avoid an extra global-state library for small apps.
+- Storage: localStorage only for high score/preferences when used, with visible recovery for corrupt data.
+- Icons: Lucide React; do not use emoji as controls.
+- Test surface: expose score/progress, level/difficulty where present, status, paused/gameOver, gameplay entities, storageStatus, and lastError under window.app.
+
+## Functional Requirements
+- R1: Build a compact browser puzzle game called Pulse Grid. It should have a playable grid-based signal routing puzzle, score, timer, reset, help/settings screens, keyboard and touch controls, local high score, and responsive UI.
+- Gameplay controls provide visible post-action state changes for click/touch and keyboard input.
+- Gameplay-only controls are rendered active only while they can affect the current game state; on menus, pause overlays, game-over screens, and other inactive states they are hidden or explicitly disabled/aria-disabled.
+- Pause/resume freezes and restarts the game loop without spawning duplicate timers.
+- Restart resets the playfield, user-controlled entities, score/progress, level/difficulty where present, and game-over state consistently.
+- Product controls must not use data-smoke-ignore; intentionally unavailable controls are disabled or aria-disabled.
+
+## Data Model
+- Game state includes playfield entities, user input state, score/progress, level/difficulty where present, status, paused, and gameOver fields.
+- HUD/status panels derive from the same gameplay state used by the simulation; do not keep divergent display-only state.
+- Timers and repeated input use stable callbacks/effects so interval setup does not thrash every frame.
+- Persistence is limited to high score and explicit preferences unless the task asks for saved games.
+- Corrupt persisted high-score/preferences data shows visible recovery feedback instead of silently resetting when persistence is used.
+
+## UI/UX Requirements
+- User-facing language: English.
+- Aesthetic: focused game UI with a clear playfield, readable score/status panels, and controls that do not compete with gameplay.
+- Palette: high-contrast game entities, readable HUD colors, Background #0F172A, Surface #111827, Text #F8FAFC, Border #334155, Success #22C55E, Error #F43F5E, Warning #F59E0B.
+- Typography: system sans; compact status labels use small but readable headings.
+- Components: stable board dimensions, visible focus rings, and 44x44px touch targets for mobile controls.
+- Touch controls must not appear as active controls outside the gameplay state unless they visibly change state or are disabled.
+- Do not add profile/account panels unless the user explicitly asks for account features.
+
+## Non-Functional
+- Performance: target first load under 2s and stable frame/input handling without duplicate intervals.
+- Accessibility: WCAG 2.1 AA, keyboard controls, aria-labels, focus states, and sufficient contrast.
+- Responsive: support 320px mobile widths through desktop with a stable board aspect ratio and non-overlapping controls.
+- Error handling: storage/preferences errors are visible, retryable, and clearable when persistence is used.
+
+Batch generation rules:
+- Generate exactly 6 screens. Do not generate more or fewer screens.
+- Do not create a PRD, requirements document, sitemap, landing page, or generic dashboard screen unless it is explicitly listed above.
+- Do not combine multiple listed screens into one design.
+- Each listed screen must be complete, production-quality, and visually consistent with the others.
+- Use a polished modern interface with real layout density and visible controls.
+- All visible user-facing text must be in English.
+- Keep screen metadata and technical identifiers in English.
+- Use a cohesive design system across all screens.
