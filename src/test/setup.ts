@@ -153,4 +153,18 @@ describe('App settings integration', () => {
     expect(globalThis.app?.state.difficulty).toBe('hard');
     expect(window.localStorage.getItem('pulse-grid-state')).toContain('"difficulty":"hard"');
   });
+
+  it('confirms the settings action while already on the settings screen', async () => {
+    render(createElement(App));
+
+    act(() => {
+      globalThis.app?.actions.openSettings();
+    });
+
+    expect(await screen.findByRole('heading', { name: 'System_Options' })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Settings' }));
+
+    expect(screen.getAllByText('Settings panel active').length).toBeGreaterThan(0);
+  });
 });
