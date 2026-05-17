@@ -41,6 +41,16 @@ function getInitialDifficulty(difficulty?: Difficulty): Difficulty {
   return difficulty ?? getAppBridge()?.state.difficulty ?? "medium";
 }
 
+function describeSavedConfiguration(options: GameOptions, difficulty: Difficulty) {
+  const enabledFlags = [
+    options.sound ? "Sound on" : "Sound off",
+    options.reducedMotion ? "Reduced motion on" : "Reduced motion off",
+    options.highContrast ? "High contrast on" : "High contrast off",
+  ].join(" / ");
+
+  return `Changes saved: ${enabledFlags} / Pulse ${options.pulseSpeed.toFixed(1)}x / ${difficulty}`;
+}
+
 export function GameOptionsSettings({ actions, options, difficulty, updateOptions, setDifficulty }: GameOptionsSettingsProps) {
   const [controlledOptions, setControlledOptions] = useState<GameOptions>(() => getInitialOptions(options));
   const [controlledDifficulty, setControlledDifficulty] = useState<Difficulty>(() => getInitialDifficulty(difficulty));
@@ -81,7 +91,7 @@ export function GameOptionsSettings({ actions, options, difficulty, updateOption
 
     applyOptions?.(controlledOptions);
     applyDifficulty?.(controlledDifficulty);
-    setCommitStatus("Changes saved");
+    setCommitStatus(describeSavedConfiguration(controlledOptions, controlledDifficulty));
     actions?.["commit-changes-5"]?.();
   };
 

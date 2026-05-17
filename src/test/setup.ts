@@ -46,4 +46,81 @@ describe('GameOptionsSettings', () => {
     expect(commitChanges).toHaveBeenCalledTimes(1);
     expect(screen.getByRole('status')).toHaveTextContent('Changes saved');
   });
+
+  it('uses the app bridge fallback when rendered without controlled props', () => {
+    const updateOptions = vi.fn();
+    const setDifficulty = vi.fn();
+    const commitChanges = vi.fn();
+    const options: GameOptions = {
+      sound: true,
+      reducedMotion: false,
+      highContrast: false,
+      pulseSpeed: 2,
+    };
+
+    globalThis.app = {
+      state: {
+        currentScreen: 'settings',
+        previousScreen: 'play',
+        difficulty: 'medium',
+        level: 1,
+        score: 0,
+        moves: 0,
+        bestScore: 0,
+        isPaused: false,
+        isGameOver: false,
+        activeCellId: 'cell-1',
+        tick: 0,
+        storageStatus: 'idle',
+        lastError: null,
+        grid: [],
+        options,
+      },
+      actions: {
+        startNewGame: vi.fn(),
+        resumeGame: vi.fn(),
+        pauseGame: vi.fn(),
+        restartLevel: vi.fn(),
+        returnToMainMenu: vi.fn(),
+        openSettings: vi.fn(),
+        closeSettings: vi.fn(),
+        openHelp: vi.fn(),
+        closeHelp: vi.fn(),
+        selectCell: vi.fn(),
+        moveActiveCell: vi.fn(),
+        tickGame: vi.fn(),
+        resetLevel: vi.fn(),
+        setDifficulty,
+        updateOptions,
+        commitOptions: commitChanges,
+        purgeProgress: vi.fn(),
+        quitSystem: vi.fn(),
+      },
+    };
+
+    render(createElement(GameOptionsSettings, {
+      actions: { 'commit-changes-5': commitChanges },
+    }));
+
+    fireEvent.click(screen.getByLabelText('Sound'));
+    fireEvent.click(screen.getByLabelText('Reduced motion'));
+    fireEvent.click(screen.getByLabelText('High contrast'));
+    fireEvent.change(screen.getByLabelText('Signal propagation speed'), { target: { value: '5' } });
+    fireEvent.change(screen.getByLabelText('Security clearance difficulty'), { target: { value: 'easy' satisfies Difficulty } });
+    fireEvent.click(screen.getByRole('button', { name: /commit_changes/i }));
+
+    expect(updateOptions).toHaveBeenCalledWith({ sound: false });
+    expect(updateOptions).toHaveBeenCalledWith({ reducedMotion: true });
+    expect(updateOptions).toHaveBeenCalledWith({ highContrast: true });
+    expect(updateOptions).toHaveBeenCalledWith({ pulseSpeed: 5 });
+    expect(updateOptions).toHaveBeenLastCalledWith({
+      sound: false,
+      reducedMotion: true,
+      highContrast: true,
+      pulseSpeed: 5,
+    });
+    expect(setDifficulty).toHaveBeenLastCalledWith('easy');
+    expect(commitChanges).toHaveBeenCalledTimes(1);
+    expect(screen.getByRole('status')).toHaveTextContent('Pulse 5.0x');
+  });
 });
