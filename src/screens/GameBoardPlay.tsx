@@ -23,10 +23,10 @@ export function GameBoardPlay({ actions }: GameBoardPlayProps) {
       <header className="hidden md:flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-touch-target-min bg-surface border-b border-outline-variant z-50 fixed top-0">
       <div className="text-headline-lg font-headline-lg font-bold tracking-tighter text-primary">PULSE_GRID</div>
       <div className="flex space-x-6 items-center">
-      <a className="text-primary font-bold hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#board" aria-current="page" data-action-id="board-1" onClick={(event) => { event.preventDefault(); actions?.["board-1"]?.(); }}>Board</a>
-      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#menu" aria-disabled="false" data-action-id="menu-2" onClick={(event) => { event.preventDefault(); actions?.["menu-2"]?.(); }}>Menu</a>
-      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#options" aria-disabled="false" data-action-id="options-3" onClick={(event) => { event.preventDefault(); actions?.["options-3"]?.(); }}>Options</a>
-      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#help" aria-disabled="false" data-action-id="button-5-5" onClick={(event) => { event.preventDefault(); actions?.["button-5-5"]?.(); }}>Help</a>
+      <button className="text-primary font-bold hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" type="button" data-action-id="board-1" onClick={actions?.["board-1"]}>Board</button>
+      <button className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" type="button" data-action-id="menu-2" onClick={actions?.["menu-2"]}>Menu</button>
+      <button className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" type="button" data-action-id="options-3" onClick={actions?.["options-3"]}>Options</button>
+      <button className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" type="button" data-action-id="button-5-5" onClick={actions?.["button-5-5"]}>Help</button>
       </div>
       <div className="flex items-center space-x-4 text-primary">
       <button className="hover:bg-surface-container-high hover:text-primary-fixed p-2 rounded-full transition-colors duration-75" type="button" data-action-id="button-4-4" onClick={actions?.["button-4-4"]}>

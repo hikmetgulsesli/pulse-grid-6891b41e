@@ -308,7 +308,7 @@ export function useAppState() {
   }, []);
 
   const openSettings = useCallback(() => {
-    setState((current) => withScreen(current, 'settings'));
+    setState((current) => (current.currentScreen === 'settings' ? current : withScreen(current, 'settings')));
   }, []);
 
   const closeSettings = useCallback(() => {

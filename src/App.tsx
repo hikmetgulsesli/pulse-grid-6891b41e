@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ControlsHelpHelp,
   GameBoardPlay,
@@ -11,6 +11,7 @@ import { useAppState } from './hooks/useAppState';
 
 export default function App() {
   const { state, actions } = useAppState();
+  const [screenNotice, setScreenNotice] = useState<string | null>(null);
 
   useEffect(() => {
     globalThis.app = { state, actions };
@@ -116,13 +117,16 @@ export default function App() {
     'menu-2': actions.returnToMainMenu,
     'options-3': actions.openSettings,
     'button-4-4': actions.openHelp,
-    'button-5-5': () => actions.startNewGame(state.difficulty),
+    'button-5-5': actions.openHelp,
     'pause-6': actions.pauseGame,
     'reset-level-7': actions.resetLevel,
   };
 
   const settingsActions = {
-    'button-1-1': actions.openSettings,
+    'button-1-1': () => {
+      actions.openSettings();
+      setScreenNotice('Settings panel active');
+    },
     'button-2-2': actions.openHelp,
     'execute-purge-3': actions.purgeProgress,
     'abort-4': actions.closeSettings,
@@ -213,7 +217,25 @@ export default function App() {
           {state.lastError}
         </div>
       )}
-      {state.currentScreen === 'settings' && <GameOptionsSettings actions={settingsActions} />}
+      {screenNotice && (
+        <div
+          role="status"
+          aria-live="polite"
+          data-setfarm-screen-notice="true"
+          className="fixed bottom-4 right-4 z-50 max-w-[calc(100vw-2rem)] rounded border border-cyan-300/50 bg-slate-950/90 px-4 py-3 text-sm leading-6 text-cyan-50 shadow-lg shadow-cyan-950/30"
+        >
+          {screenNotice}
+        </div>
+      )}
+      {state.currentScreen === 'settings' && (
+        <GameOptionsSettings
+          actions={settingsActions}
+          difficulty={state.difficulty}
+          options={state.options}
+          setDifficulty={actions.setDifficulty}
+          updateOptions={actions.updateOptions}
+        />
+      )}
       {state.currentScreen === 'help' && <ControlsHelpHelp actions={helpActions} />}
       {state.currentScreen === 'pause' && (
         <PauseOverlayOverlay
