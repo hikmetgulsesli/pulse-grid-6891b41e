@@ -26,13 +26,13 @@ export function GameBoardPlay({ actions }: GameBoardPlayProps) {
       <a className="text-primary font-bold hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#board" aria-current="page" data-action-id="board-1" onClick={(event) => { event.preventDefault(); actions?.["board-1"]?.(); }}>Board</a>
       <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#menu" aria-disabled="false" data-action-id="menu-2" onClick={(event) => { event.preventDefault(); actions?.["menu-2"]?.(); }}>Menu</a>
       <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#options" aria-disabled="false" data-action-id="options-3" onClick={(event) => { event.preventDefault(); actions?.["options-3"]?.(); }}>Options</a>
-      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#help" aria-disabled="false" data-action-id="button-5-5" onClick={(event) => { event.preventDefault(); actions?.["button-5-5"]?.(); }}>Help</a>
+      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#help" aria-disabled="false" data-action-id="button-4-4" onClick={(event) => { event.preventDefault(); actions?.["button-4-4"]?.(); }}>Help</a>
       </div>
       <div className="flex items-center space-x-4 text-primary">
-      <button className="hover:bg-surface-container-high hover:text-primary-fixed p-2 rounded-full transition-colors duration-75" type="button" data-action-id="button-4-4" onClick={actions?.["button-4-4"]}>
+      <button className="hover:bg-surface-container-high hover:text-primary-fixed p-2 rounded-full transition-colors duration-75" type="button" data-action-id="options-3" onClick={actions?.["options-3"]}>
       <Settings aria-hidden={true} focusable="false" />
       </button>
-      <button className="hover:bg-surface-container-high hover:text-primary-fixed p-2 rounded-full transition-colors duration-75" type="button" data-action-id="button-5-5" onClick={actions?.["button-5-5"]}>
+      <button className="hover:bg-surface-container-high hover:text-primary-fixed p-2 rounded-full transition-colors duration-75" type="button" data-action-id="button-4-4" onClick={actions?.["button-4-4"]}>
       <Circle aria-hidden={true} focusable="false" />
       </button>
       </div>
@@ -210,7 +210,7 @@ export function GameBoardPlay({ actions }: GameBoardPlayProps) {
       <Circle aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Options</span>
       </a>
-      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#help" aria-disabled="false" data-action-id="button-5-5" onClick={(event) => { event.preventDefault(); actions?.["button-5-5"]?.(); }}>
+      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#help" aria-disabled="false" data-action-id="button-4-4" onClick={(event) => { event.preventDefault(); actions?.["button-4-4"]?.(); }}>
       <Circle aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Help</span>
       </a>
