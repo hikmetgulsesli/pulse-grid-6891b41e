@@ -7,6 +7,7 @@
 // 3. Wire interactive controls through the typed actions prop
 // 4. Replace placeholder data with props/state
 
+import { useState } from "react";
 import { Circle, Save, Settings } from "lucide-react";
 
 
@@ -17,6 +18,12 @@ export interface GameOptionsSettingsProps {
 }
 
 export function GameOptionsSettings({ actions }: GameOptionsSettingsProps) {
+  const [masterSignal, setMasterSignal] = useState(true);
+  const [interfaceSfx, setInterfaceSfx] = useState(true);
+  const [backgroundSynth, setBackgroundSynth] = useState(false);
+  const [signalSpeed, setSignalSpeed] = useState(1.5);
+  const [difficulty, setDifficulty] = useState("2");
+
   return (
     <>
       {/* Subdued grid background element */}
@@ -25,10 +32,10 @@ export function GameOptionsSettings({ actions }: GameOptionsSettingsProps) {
       <header className="bg-surface dark:bg-surface border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-touch-target-min fixed top-0 z-50">
       <div className="text-headline-lg font-headline-lg font-bold tracking-tighter text-primary dark:text-primary uppercase">PULSE_GRID</div>
       <div className="flex items-center gap-2">
-      <button className="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary-fixed transition-colors rounded-DEFAULT" type="button" data-action-id="button-1-1" onClick={actions?.["button-1-1"]}>
+      <button aria-label="Settings" className="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary-fixed transition-colors rounded-DEFAULT" type="button" data-action-id="button-1-1" onClick={actions?.["button-1-1"]}>
       <Settings aria-hidden={true} focusable="false" />
       </button>
-      <button className="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary-fixed transition-colors rounded-DEFAULT" type="button" data-action-id="button-2-2" onClick={actions?.["button-2-2"]}>
+      <button aria-label="Help" className="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary-fixed transition-colors rounded-DEFAULT" type="button" data-action-id="button-2-2" onClick={actions?.["button-2-2"]}>
       <Circle aria-hidden={true} focusable="false" />
       </button>
       </div>
@@ -62,24 +69,24 @@ export function GameOptionsSettings({ actions }: GameOptionsSettingsProps) {
       <label className="flex justify-between items-center py-3 cursor-pointer group/toggle">
       <span className="text-data-md font-data-md text-on-surface-variant group-hover/toggle:text-primary-fixed transition-colors">Master Signal</span>
       <div className="relative inline-flex items-center cursor-pointer">
-      <input checked={true} className="sr-only peer" type="checkbox" />
-      <div className="w-12 h-6 bg-surface border border-outline-variant peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary peer-checked:bg-primary/20 peer-checked:border-primary peer-checked:after:translate-x-[24px] peer-checked:after:bg-primary after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-outline-variant after:h-[16px] after:w-[20px] after:transition-all after:border-r after:border-surface"></div>
+      <input checked={masterSignal} className="sr-only peer" type="checkbox" onChange={(event) => setMasterSignal(event.target.checked)} />
+      <div className="w-12 h-6 bg-surface border border-outline-variant peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary peer-checked:bg-primary/20 peer-checked:border-primary peer-checked:after:translate-x-[24px] peer-checked:after:bg-primary after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-outline-variant after:h-[16px] after:w-[20px] after:transition-colors after:border-r after:border-surface"></div>
       </div>
       </label>
       {/* Toggle 2: SFX */}
       <label className="flex justify-between items-center py-3 cursor-pointer group/toggle">
       <span className="text-data-md font-data-md text-on-surface-variant group-hover/toggle:text-primary-fixed transition-colors">Interface SFX</span>
       <div className="relative inline-flex items-center cursor-pointer">
-      <input checked={true} className="sr-only peer" type="checkbox" />
-      <div className="w-12 h-6 bg-surface border border-outline-variant peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary peer-checked:bg-primary/20 peer-checked:border-primary peer-checked:after:translate-x-[24px] peer-checked:after:bg-primary after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-outline-variant after:h-[16px] after:w-[20px] after:transition-all after:border-r after:border-surface"></div>
+      <input checked={interfaceSfx} className="sr-only peer" type="checkbox" onChange={(event) => setInterfaceSfx(event.target.checked)} />
+      <div className="w-12 h-6 bg-surface border border-outline-variant peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary peer-checked:bg-primary/20 peer-checked:border-primary peer-checked:after:translate-x-[24px] peer-checked:after:bg-primary after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-outline-variant after:h-[16px] after:w-[20px] after:transition-colors after:border-r after:border-surface"></div>
       </div>
       </label>
       {/* Toggle 3: Music */}
       <label className="flex justify-between items-center py-3 cursor-pointer group/toggle">
       <span className="text-data-md font-data-md text-on-surface-variant group-hover/toggle:text-primary-fixed transition-colors">Background Synth</span>
       <div className="relative inline-flex items-center cursor-pointer">
-      <input className="sr-only peer" type="checkbox" />
-      <div className="w-12 h-6 bg-surface border border-outline-variant peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary peer-checked:bg-primary/20 peer-checked:border-primary peer-checked:after:translate-x-[24px] peer-checked:after:bg-primary after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-outline-variant after:h-[16px] after:w-[20px] after:transition-all after:border-r after:border-surface"></div>
+      <input checked={backgroundSynth} className="sr-only peer" type="checkbox" onChange={(event) => setBackgroundSynth(event.target.checked)} />
+      <div className="w-12 h-6 bg-surface border border-outline-variant peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary peer-checked:bg-primary/20 peer-checked:border-primary peer-checked:after:translate-x-[24px] peer-checked:after:bg-primary after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-outline-variant after:h-[16px] after:w-[20px] after:transition-colors after:border-r after:border-surface"></div>
       </div>
       </label>
       </div>
@@ -101,10 +108,10 @@ export function GameOptionsSettings({ actions }: GameOptionsSettingsProps) {
                                       Signal Propagation Speed
                                       <span className="text-label-sm font-label-sm opacity-60 mt-1">Adjusts node connection animation rate</span>
       </label>
-      <span className="text-data-md font-data-md text-primary bg-surface-container border border-primary/30 px-2 py-1">1.5x</span>
+      <span className="text-data-md font-data-md text-primary bg-surface-container border border-primary/30 px-2 py-1">{signalSpeed.toFixed(1)}x</span>
       </div>
       <div className="relative pt-2">
-      <input className="w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-low rounded-DEFAULT" max="2" min="0.5" step="0.1" type="range" value="1.5" />
+      <input aria-label="Signal propagation speed" className="w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-low rounded-DEFAULT" max="2" min="0.5" step="0.1" type="range" value={signalSpeed} onChange={(event) => setSignalSpeed(Number(event.target.value))} />
       <div className="flex justify-between text-label-sm font-label-sm text-on-surface-variant mt-2 opacity-50">
       <span>0.5x</span>
       <span>2.0x</span>
@@ -115,9 +122,9 @@ export function GameOptionsSettings({ actions }: GameOptionsSettingsProps) {
       <div>
       <label className="block text-data-md font-data-md text-on-surface-variant mb-3">Security Clearance (Difficulty)</label>
       <div className="relative">
-      <select className="block w-full bg-surface-container border border-outline-variant text-primary-fixed text-data-md font-data-md p-4 appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary rounded-DEFAULT cursor-pointer hover:bg-surface-container-high transition-colors">
+      <select className="block w-full bg-surface-container border border-outline-variant text-primary-fixed text-data-md font-data-md p-4 appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary rounded-DEFAULT cursor-pointer hover:bg-surface-container-high transition-colors" value={difficulty} onChange={(event) => setDifficulty(event.target.value)}>
       <option value="1">Level 1 (Novice)</option>
-      <option selected={true} value="2">Level 2 (Standard Agent)</option>
+      <option value="2">Level 2 (Standard Agent)</option>
       <option value="3">Level 3 (Expert Hacker)</option>
       </select>
       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-primary">

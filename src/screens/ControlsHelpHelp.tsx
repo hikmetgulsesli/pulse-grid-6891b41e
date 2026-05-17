@@ -71,15 +71,15 @@ export function ControlsHelpHelp({ actions }: ControlsHelpHelpProps) {
       <li className="flex items-center justify-between">
       <span className="text-body-lg font-body-lg text-on-surface-variant">Navigation</span>
       <div className="flex gap-2">
-      <span className="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">W</span>
-      <span className="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">A</span>
-      <span className="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">S</span>
-      <span className="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">D</span>
+      <span aria-label="Arrow up" className="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">↑</span>
+      <span aria-label="Arrow left" className="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">←</span>
+      <span aria-label="Arrow down" className="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">↓</span>
+      <span aria-label="Arrow right" className="inline-flex items-center justify-center w-10 h-10 border border-outline-variant bg-surface-bright text-data-md font-data-md rounded-DEFAULT text-on-surface shadow-[0_2px_0_#334155]">→</span>
       </div>
       </li>
       <li className="flex items-center justify-between">
       <span className="text-body-lg font-body-lg text-on-surface-variant">Rotate Node / Action</span>
-      <span className="inline-flex items-center justify-center px-4 h-10 border border-primary bg-primary/10 text-primary text-data-md font-data-md rounded-DEFAULT shadow-[0_0_8px_rgba(75,226,119,0.3)]">SPACE</span>
+      <span className="inline-flex items-center justify-center px-4 h-10 border border-primary bg-primary/10 text-primary text-data-md font-data-md rounded-DEFAULT shadow-[0_0_8px_rgba(75,226,119,0.3)]">SPACE / ENTER</span>
       </li>
       <li className="flex items-center justify-between">
       <span className="text-body-lg font-body-lg text-on-surface-variant">System Pause</span>
