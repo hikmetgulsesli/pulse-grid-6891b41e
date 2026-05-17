@@ -151,12 +151,7 @@ export default function App() {
       )}
       {state.currentScreen === 'settings' && <GameOptionsSettings actions={settingsActions} />}
       {state.currentScreen === 'help' && <ControlsHelpHelp actions={helpActions} />}
-      {state.currentScreen === 'pause' && (
-        <>
-          <GameBoardPlay actions={boardActions} />
-          <PauseOverlayOverlay actions={pauseActions} />
-        </>
-      )}
+      {state.currentScreen === 'pause' && <PauseOverlayOverlay actions={pauseActions} />}
       {state.currentScreen === 'gameOver' && <GameOverResult actions={gameOverActions} />}
     </div>
   );
