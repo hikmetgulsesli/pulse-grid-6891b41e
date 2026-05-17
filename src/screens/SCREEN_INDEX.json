@@ -1,0 +1,218 @@
+[
+  {
+    "screenId": "6536d3878b6b42beab06233d0021e133",
+    "title": "Game Over (result)",
+    "componentName": "GameOverResult",
+    "file": "src/screens/GameOverResult.tsx",
+    "buttons": 2,
+    "inputs": 0,
+    "links": 0,
+    "actions": [
+      {
+        "id": "main-menu-1",
+        "kind": "button",
+        "label": "Main Menu",
+        "index": 0
+      },
+      {
+        "id": "play-again-2",
+        "kind": "button",
+        "label": "Play Again",
+        "index": 1
+      }
+    ]
+  },
+  {
+    "screenId": "f935cf669e4c43e0b165074f59958f58",
+    "title": "Pause Overlay (overlay)",
+    "componentName": "PauseOverlayOverlay",
+    "file": "src/screens/PauseOverlayOverlay.tsx",
+    "buttons": 3,
+    "inputs": 0,
+    "links": 0,
+    "actions": [
+      {
+        "id": "resume-1",
+        "kind": "button",
+        "label": "Resume",
+        "index": 0
+      },
+      {
+        "id": "restart-level-2",
+        "kind": "button",
+        "label": "Restart Level",
+        "index": 1
+      },
+      {
+        "id": "return-to-main-menu-3",
+        "kind": "button",
+        "label": "Return to Main Menu",
+        "index": 2
+      }
+    ]
+  },
+  {
+    "screenId": "7543052b5b7f41f3b4ea1b9db70aa0cf",
+    "title": "Controls Help (help)",
+    "componentName": "ControlsHelpHelp",
+    "file": "src/screens/ControlsHelpHelp.tsx",
+    "buttons": 2,
+    "inputs": 0,
+    "links": 0,
+    "actions": [
+      {
+        "id": "button-1-1",
+        "kind": "button",
+        "label": "Button 1",
+        "index": 0
+      },
+      {
+        "id": "return-to-grid-2",
+        "kind": "button",
+        "label": "RETURN TO GRID",
+        "index": 1
+      }
+    ]
+  },
+  {
+    "screenId": "1984b6bcc0e54997b51084f8a0850014",
+    "title": "Main Menu (menu)",
+    "componentName": "MainMenuMenu",
+    "file": "src/screens/MainMenuMenu.tsx",
+    "buttons": 6,
+    "inputs": 0,
+    "links": 1,
+    "actions": [
+      {
+        "id": "resume-game-1",
+        "kind": "button",
+        "label": "Resume Game",
+        "index": 0
+      },
+      {
+        "id": "start-new-game-2",
+        "kind": "button",
+        "label": "Start New Game",
+        "index": 1
+      },
+      {
+        "id": "easy-3",
+        "kind": "button",
+        "label": "Easy",
+        "index": 2
+      },
+      {
+        "id": "medium-4",
+        "kind": "button",
+        "label": "Medium",
+        "index": 3
+      },
+      {
+        "id": "hard-5",
+        "kind": "button",
+        "label": "Hard",
+        "index": 4
+      },
+      {
+        "id": "quit-system-6",
+        "kind": "button",
+        "label": "Quit System",
+        "index": 5
+      }
+    ]
+  },
+  {
+    "screenId": "4615bcdcc8534c3b9e8c32ee448d51ac",
+    "title": "Game Options (settings)",
+    "componentName": "GameOptionsSettings",
+    "file": "src/screens/GameOptionsSettings.tsx",
+    "buttons": 5,
+    "inputs": 4,
+    "links": 0,
+    "actions": [
+      {
+        "id": "button-1-1",
+        "kind": "button",
+        "label": "Button 1",
+        "index": 0
+      },
+      {
+        "id": "button-2-2",
+        "kind": "button",
+        "label": "Button 2",
+        "index": 1
+      },
+      {
+        "id": "execute-purge-3",
+        "kind": "button",
+        "label": "EXECUTE_PURGE",
+        "index": 2
+      },
+      {
+        "id": "abort-4",
+        "kind": "button",
+        "label": "Abort",
+        "index": 3
+      },
+      {
+        "id": "commit-changes-5",
+        "kind": "button",
+        "label": "Commit_Changes",
+        "index": 4
+      }
+    ]
+  },
+  {
+    "screenId": "09edf641762d4cb9a8987826fb7c8b1c",
+    "title": "Game Board (play)",
+    "componentName": "GameBoardPlay",
+    "file": "src/screens/GameBoardPlay.tsx",
+    "buttons": 7,
+    "inputs": 0,
+    "links": 4,
+    "actions": [
+      {
+        "id": "board-1",
+        "kind": "button",
+        "label": "Board",
+        "index": 0
+      },
+      {
+        "id": "menu-2",
+        "kind": "button",
+        "label": "Menu",
+        "index": 1
+      },
+      {
+        "id": "options-3",
+        "kind": "button",
+        "label": "Options",
+        "index": 2
+      },
+      {
+        "id": "button-4-4",
+        "kind": "button",
+        "label": "Button 4",
+        "index": 3
+      },
+      {
+        "id": "button-5-5",
+        "kind": "button",
+        "label": "Button 5",
+        "index": 4
+      },
+      {
+        "id": "pause-6",
+        "kind": "button",
+        "label": "Pause",
+        "index": 5
+      },
+      {
+        "id": "reset-level-7",
+        "kind": "button",
+        "label": "Reset Level",
+        "index": 6
+      }
+    ]
+  }
+]
