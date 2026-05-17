@@ -83,6 +83,7 @@ export default function App() {
 
   const activeCell = state.grid.find((cell) => cell.id === state.activeCellId);
   const clearedCount = state.grid.filter((cell) => cell.state === 'cleared').length;
+  const gridSize = Math.sqrt(state.grid.length);
 
   const mainMenuActions = {
     'resume-game-1': actions.resumeGame,
@@ -133,6 +134,43 @@ export default function App() {
       {state.currentScreen === 'play' && (
         <>
           <GameBoardPlay actions={boardActions} />
+          <section
+            aria-label="Playable pulse grid"
+            data-setfarm-playable-grid="true"
+            className="fixed left-1/2 top-1/2 z-40 w-[min(84vw,34rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border border-cyan-200/35 bg-slate-950/80 p-4 shadow-2xl shadow-cyan-950/40 backdrop-blur-md"
+          >
+            <div
+              className="grid gap-2"
+              style={{ gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))` }}
+            >
+              {state.grid.map((cell) => (
+                <button
+                  key={cell.id}
+                  type="button"
+                  aria-label={`Cell ${cell.row + 1}, ${cell.col + 1} ${cell.state}`}
+                  aria-pressed={cell.state === 'cleared'}
+                  disabled={cell.state === 'cleared'}
+                  data-cell-id={cell.id}
+                  data-cell-state={cell.state}
+                  onClick={() => actions.selectCell(cell.id)}
+                  className={[
+                    'aspect-square rounded border text-label-sm font-label-sm transition focus:outline-none focus:ring-2 focus:ring-cyan-100',
+                    cell.state === 'active'
+                      ? 'border-cyan-100 bg-cyan-300 text-slate-950 shadow-lg shadow-cyan-400/40'
+                      : '',
+                    cell.state === 'idle'
+                      ? 'border-cyan-200/40 bg-cyan-950/60 text-cyan-50 hover:border-cyan-100 hover:bg-cyan-800/80'
+                      : '',
+                    cell.state === 'cleared'
+                      ? 'cursor-not-allowed border-emerald-300/30 bg-emerald-500/25 text-emerald-100 opacity-70'
+                      : '',
+                  ].join(' ')}
+                >
+                  {cell.row + 1}.{cell.col + 1}
+                </button>
+              ))}
+            </div>
+          </section>
           <div
             role="status"
             aria-live="polite"
@@ -148,6 +186,15 @@ export default function App() {
             </div>
           </div>
         </>
+      )}
+      {state.lastError && (
+        <div
+          role="alert"
+          data-setfarm-storage-recovery="true"
+          className="fixed right-4 top-4 z-50 max-w-[calc(100vw-2rem)] rounded border border-amber-300/50 bg-amber-950/90 px-4 py-3 text-sm leading-6 text-amber-50 shadow-lg shadow-amber-950/30"
+        >
+          {state.lastError}
+        </div>
       )}
       {state.currentScreen === 'settings' && <GameOptionsSettings actions={settingsActions} />}
       {state.currentScreen === 'help' && <ControlsHelpHelp actions={helpActions} />}

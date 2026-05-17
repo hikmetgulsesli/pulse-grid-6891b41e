@@ -1,7 +1,8 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { AppActions, Difficulty, GameOptions, GameState, GridCell, MoveDirection, ScreenId } from '../types/domain';
 
 const STORAGE_KEY = 'pulse-grid-state';
+const STORAGE_RECOVERY_MESSAGE = 'Saved preferences were reset because the stored data was unreadable.';
 
 const gridSizeByDifficulty: Record<Difficulty, number> = {
   easy: 4,
@@ -15,6 +16,12 @@ const defaultOptions: GameOptions = {
   highContrast: false,
   pulseSpeed: 2,
 };
+
+interface PersistedProgress {
+  bestScore: number;
+  difficulty: Difficulty;
+  options: GameOptions;
+}
 
 function buildGrid(difficulty: Difficulty): GridCell[] {
   const size = gridSizeByDifficulty[difficulty];
@@ -35,7 +42,7 @@ function createInitialState(): GameState {
   const grid = buildGrid('medium');
 
   return {
-    currentScreen: 'menu',
+    currentScreen: 'play',
     previousScreen: 'menu',
     difficulty: 'medium',
     level: 1,
@@ -61,23 +68,69 @@ function withScreen(state: GameState, currentScreen: ScreenId): GameState {
   };
 }
 
-function normalizeHydratedState(hydratedState: Partial<GameState>): GameState {
+function isDifficulty(value: unknown): value is Difficulty {
+  return value === 'easy' || value === 'medium' || value === 'hard';
+}
+
+function hydrateOptions(value: unknown): GameOptions | null {
+  if (!value || typeof value !== 'object') {
+    return null;
+  }
+
+  const candidate = value as Partial<GameOptions>;
+  if (
+    typeof candidate.sound !== 'boolean' ||
+    typeof candidate.reducedMotion !== 'boolean' ||
+    typeof candidate.highContrast !== 'boolean' ||
+    typeof candidate.pulseSpeed !== 'number'
+  ) {
+    return null;
+  }
+
+  return {
+    sound: candidate.sound,
+    reducedMotion: candidate.reducedMotion,
+    highContrast: candidate.highContrast,
+    pulseSpeed: Math.max(1, Math.min(5, Math.round(candidate.pulseSpeed))),
+  };
+}
+
+function readPersistedProgress(rawState: string): PersistedProgress | null {
+  const parsed = JSON.parse(rawState) as Partial<PersistedProgress>;
+  const options = hydrateOptions(parsed.options);
+
+  if (typeof parsed.bestScore !== 'number' || !Number.isFinite(parsed.bestScore) || !isDifficulty(parsed.difficulty) || !options) {
+    return null;
+  }
+
+  return {
+    bestScore: Math.max(0, Math.floor(parsed.bestScore)),
+    difficulty: parsed.difficulty,
+    options,
+  };
+}
+
+function applyPersistedProgress(persistedProgress: PersistedProgress): GameState {
   const baseState = createInitialState();
-  const difficulty = hydratedState.difficulty ?? baseState.difficulty;
-  const grid = hydratedState.grid?.length ? hydratedState.grid : buildGrid(difficulty);
+  const grid = buildGrid(persistedProgress.difficulty);
 
   return {
     ...baseState,
-    ...hydratedState,
-    difficulty,
+    bestScore: persistedProgress.bestScore,
+    difficulty: persistedProgress.difficulty,
     grid,
-    options: {
-      ...baseState.options,
-      ...hydratedState.options,
-    },
-    activeCellId: hydratedState.activeCellId ?? getInitialActiveCellId(grid),
+    options: persistedProgress.options,
+    activeCellId: getInitialActiveCellId(grid),
     storageStatus: 'loaded',
     lastError: null,
+  };
+}
+
+function toPersistedProgress(state: GameState): PersistedProgress {
+  return {
+    bestScore: state.bestScore,
+    difficulty: state.difficulty,
+    options: state.options,
   };
 }
 
@@ -142,6 +195,7 @@ export function advanceGameTick(current: GameState): GameState {
 }
 
 export function useAppState() {
+  const skipNextPersistRef = useRef(false);
   const [state, setState] = useState<GameState>(() => {
     if (typeof window === 'undefined') {
       return createInitialState();
@@ -149,15 +203,47 @@ export function useAppState() {
 
     try {
       const rawState = window.localStorage.getItem(STORAGE_KEY);
-      return rawState ? normalizeHydratedState(JSON.parse(rawState)) : createInitialState();
+      if (!rawState) {
+        return createInitialState();
+      }
+
+      const persistedProgress = readPersistedProgress(rawState);
+      return persistedProgress
+        ? applyPersistedProgress(persistedProgress)
+        : {
+            ...createInitialState(),
+            storageStatus: 'error',
+            lastError: STORAGE_RECOVERY_MESSAGE,
+          };
     } catch (error) {
       return {
         ...createInitialState(),
         storageStatus: 'error',
-        lastError: getStorageErrorMessage(error),
+        lastError: `${STORAGE_RECOVERY_MESSAGE} ${getStorageErrorMessage(error)}`,
       };
     }
   });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    if (skipNextPersistRef.current) {
+      skipNextPersistRef.current = false;
+      return;
+    }
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(toPersistedProgress(state)));
+    } catch (error) {
+      setState((current) => ({
+        ...current,
+        storageStatus: 'error',
+        lastError: getStorageErrorMessage(error),
+      }));
+    }
+  }, [state.bestScore, state.difficulty, state.options]);
 
   const startNewGame = useCallback((difficulty: Difficulty = state.difficulty) => {
     const grid = buildGrid(difficulty);
@@ -354,7 +440,7 @@ export function useAppState() {
   const commitOptions = useCallback(() => {
     setState((current) => {
       try {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(toPersistedProgress(current)));
         return {
           ...withScreen(current, current.previousScreen === 'settings' ? 'play' : current.previousScreen),
           storageStatus: 'saved',
@@ -373,6 +459,7 @@ export function useAppState() {
   const purgeProgress = useCallback(() => {
     try {
       window.localStorage.removeItem(STORAGE_KEY);
+      skipNextPersistRef.current = true;
       setState({
         ...createInitialState(),
         storageStatus: 'purged',
