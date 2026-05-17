@@ -71,7 +71,7 @@ export function MainMenuMenu({ actions }: MainMenuMenuProps) {
       {/* Small Footer */}
       <footer className="w-full p-4 flex justify-between items-center text-label-sm font-label-sm text-on-surface-variant z-10 absolute bottom-0">
       <span className="uppercase">v2.4.1.09</span>
-      <a className="hover:text-primary transition-colors uppercase flex items-center gap-1 focus:outline-none focus:text-primary" href="#">
+      <a className="hover:text-primary transition-colors uppercase flex items-center gap-1 focus:outline-none focus:text-primary" href="#help" aria-disabled="true" data-navigation-state="disabled" tabIndex={-1} onClick={(event) => { event.preventDefault(); }} onKeyDown={(event) => { event.preventDefault(); }}>
       <Circle className="text-[16px]" aria-hidden={true} focusable="false" />
                   Help
               </a>
