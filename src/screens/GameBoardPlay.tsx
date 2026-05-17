@@ -197,19 +197,19 @@ export function GameBoardPlay({ actions }: GameBoardPlayProps) {
       </main>
       {/* BottomNavBar (Mobile Only) */}
       <nav className="md:hidden flex justify-around items-center w-full h-16 bg-surface-container-lowest border-t border-outline-variant fixed bottom-0 z-50">
-      <a className="flex flex-col items-center justify-center text-primary-fixed bg-surface-container-highest rounded-xl px-4 py-1 translate-y-0.5 duration-100" href="#">
+      <a className="flex flex-col items-center justify-center text-primary-fixed bg-surface-container-highest rounded-xl px-4 py-1 translate-y-0.5 duration-100" href="#board" aria-current="page" onClick={(event) => { event.preventDefault(); actions?.["board-1"]?.(); }}>
       <Circle  style={{fontVariationSettings: "'FILL' 1"}} aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Board</span>
       </a>
-      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#">
+      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#menu" onClick={(event) => { event.preventDefault(); actions?.["menu-2"]?.(); }}>
       <Menu aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Menu</span>
       </a>
-      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#">
+      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#options" onClick={(event) => { event.preventDefault(); actions?.["options-3"]?.(); }}>
       <Circle aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Options</span>
       </a>
-      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#">
+      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#help">
       <Circle aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Help</span>
       </a>
