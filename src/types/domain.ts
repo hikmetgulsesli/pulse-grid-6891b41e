@@ -4,6 +4,10 @@ export type Difficulty = 'easy' | 'medium' | 'hard';
 
 export type CellState = 'idle' | 'active' | 'cleared';
 
+export type StorageStatus = 'idle' | 'loaded' | 'saved' | 'purged' | 'unavailable' | 'error';
+
+export type MoveDirection = 'up' | 'down' | 'left' | 'right';
+
 export interface GridCell {
   id: string;
   row: number;
@@ -28,6 +32,10 @@ export interface GameState {
   bestScore: number;
   isPaused: boolean;
   isGameOver: boolean;
+  activeCellId: string;
+  tick: number;
+  storageStatus: StorageStatus;
+  lastError: string | null;
   grid: GridCell[];
   options: GameOptions;
 }
@@ -43,6 +51,8 @@ export interface AppActions {
   openHelp: () => void;
   closeHelp: () => void;
   selectCell: (cellId: string) => void;
+  moveActiveCell: (direction: MoveDirection) => void;
+  tickGame: () => void;
   resetLevel: () => void;
   setDifficulty: (difficulty: Difficulty) => void;
   updateOptions: (options: Partial<GameOptions>) => void;

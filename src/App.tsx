@@ -19,6 +19,71 @@ export default function App() {
     }
   }, [state, actions]);
 
+  useEffect(() => {
+    if (state.currentScreen !== 'play' || state.isPaused || state.isGameOver) {
+      return undefined;
+    }
+
+    const baseInterval = state.options.reducedMotion ? 1800 : 1300;
+    const tickIntervalMs = Math.max(450, baseInterval - state.options.pulseSpeed * 175);
+    const intervalId = window.setInterval(actions.tickGame, tickIntervalMs);
+
+    return () => window.clearInterval(intervalId);
+  }, [
+    actions.tickGame,
+    state.currentScreen,
+    state.isGameOver,
+    state.isPaused,
+    state.options.pulseSpeed,
+    state.options.reducedMotion,
+  ]);
+
+  useEffect(() => {
+    if (state.currentScreen !== 'play' || state.isPaused || state.isGameOver) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || event.metaKey || event.altKey || event.ctrlKey) {
+        return;
+      }
+
+      if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        actions.moveActiveCell('up');
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        actions.moveActiveCell('down');
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        actions.moveActiveCell('left');
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        actions.moveActiveCell('right');
+      } else if (event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault();
+        actions.selectCell(state.activeCellId);
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
+        actions.pauseGame();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [
+    actions.moveActiveCell,
+    actions.pauseGame,
+    actions.selectCell,
+    state.activeCellId,
+    state.currentScreen,
+    state.isGameOver,
+    state.isPaused,
+  ]);
+
+  const activeCell = state.grid.find((cell) => cell.id === state.activeCellId);
+  const clearedCount = state.grid.filter((cell) => cell.state === 'cleared').length;
+
   const mainMenuActions = {
     'resume-game-1': actions.resumeGame,
     'start-new-game-2': () => actions.startNewGame(),
@@ -29,7 +94,7 @@ export default function App() {
   };
 
   const boardActions = {
-    'board-1': () => actions.selectCell(state.grid.find((cell) => cell.state !== 'cleared')?.id ?? state.grid[0]?.id ?? 'cell-1'),
+    'board-1': () => actions.selectCell(state.activeCellId),
     'menu-2': actions.returnToMainMenu,
     'options-3': actions.openSettings,
     'button-4-4': actions.openHelp,
@@ -65,7 +130,25 @@ export default function App() {
   return (
     <div data-setfarm-root="pulse-grid" className="min-h-screen bg-slate-950 text-white">
       {state.currentScreen === 'menu' && <MainMenuMenu actions={mainMenuActions} />}
-      {state.currentScreen === 'play' && <GameBoardPlay actions={boardActions} />}
+      {state.currentScreen === 'play' && (
+        <>
+          <GameBoardPlay actions={boardActions} />
+          <div
+            role="status"
+            aria-live="polite"
+            data-setfarm-game-status="play"
+            className="fixed bottom-4 left-4 z-50 max-w-[calc(100vw-2rem)] rounded border border-cyan-300/40 bg-slate-950/90 px-4 py-3 text-sm leading-6 text-cyan-50 shadow-lg shadow-cyan-950/30 backdrop-blur"
+          >
+            <div className="font-label-sm text-label-sm uppercase text-cyan-200">Pulse Grid</div>
+            <div>
+              Score {state.score} | Moves {state.moves} | Cleared {clearedCount}/{state.grid.length}
+            </div>
+            <div>
+              Active {activeCell ? `${activeCell.row + 1},${activeCell.col + 1}` : state.activeCellId} | Tick {state.tick}
+            </div>
+          </div>
+        </>
+      )}
       {state.currentScreen === 'settings' && <GameOptionsSettings actions={settingsActions} />}
       {state.currentScreen === 'help' && <ControlsHelpHelp actions={helpActions} />}
       {state.currentScreen === 'pause' && (
