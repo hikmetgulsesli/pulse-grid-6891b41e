@@ -7,7 +7,7 @@
 // 3. Wire interactive controls through the typed actions prop
 // 4. Replace placeholder data with props/state
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Circle, Save, Settings } from "lucide-react";
 import type { Difficulty, GameOptions } from "../types/domain";
 
@@ -48,6 +48,18 @@ export function GameOptionsSettings({ actions, options, difficulty, updateOption
   const appBridge = getAppBridge();
   const applyOptions = updateOptions ?? appBridge?.actions.updateOptions;
   const applyDifficulty = setDifficulty ?? appBridge?.actions.setDifficulty;
+
+  useEffect(() => {
+    if (options) {
+      setControlledOptions(options);
+    }
+  }, [options]);
+
+  useEffect(() => {
+    if (difficulty) {
+      setControlledDifficulty(difficulty);
+    }
+  }, [difficulty]);
 
   const handleOptionChange = (nextOptions: Partial<GameOptions>) => {
     setControlledOptions((current) => ({ ...current, ...nextOptions }));
