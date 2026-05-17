@@ -24,9 +24,9 @@ export function GameBoardPlay({ actions }: GameBoardPlayProps) {
       <div className="text-headline-lg font-headline-lg font-bold tracking-tighter text-primary">PULSE_GRID</div>
       <div className="flex space-x-6 items-center">
       <a className="text-primary font-bold hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#board" aria-current="page" data-action-id="board-1" onClick={(event) => { event.preventDefault(); actions?.["board-1"]?.(); }}>Board</a>
-      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#menu" data-action-id="menu-2" onClick={(event) => { event.preventDefault(); actions?.["menu-2"]?.(); }}>Menu</a>
-      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#options" data-action-id="options-3" onClick={(event) => { event.preventDefault(); actions?.["options-3"]?.(); }}>Options</a>
-      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#help" data-action-id="button-5-5" onClick={(event) => { event.preventDefault(); actions?.["button-5-5"]?.(); }}>Help</a>
+      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#menu" aria-disabled="false" data-action-id="menu-2" onClick={(event) => { event.preventDefault(); actions?.["menu-2"]?.(); }}>Menu</a>
+      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#options" aria-disabled="false" data-action-id="options-3" onClick={(event) => { event.preventDefault(); actions?.["options-3"]?.(); }}>Options</a>
+      <a className="text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-primary-fixed px-3 py-1 rounded transition-colors duration-75" href="#help" aria-disabled="false" data-action-id="button-5-5" onClick={(event) => { event.preventDefault(); actions?.["button-5-5"]?.(); }}>Help</a>
       </div>
       <div className="flex items-center space-x-4 text-primary">
       <button className="hover:bg-surface-container-high hover:text-primary-fixed p-2 rounded-full transition-colors duration-75" type="button" data-action-id="button-4-4" onClick={actions?.["button-4-4"]}>
@@ -202,15 +202,15 @@ export function GameBoardPlay({ actions }: GameBoardPlayProps) {
       <Circle  style={{fontVariationSettings: "'FILL' 1"}} aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Board</span>
       </a>
-      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#menu" data-action-id="menu-2" onClick={(event) => { event.preventDefault(); actions?.["menu-2"]?.(); }}>
+      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#menu" aria-disabled="false" data-action-id="menu-2" onClick={(event) => { event.preventDefault(); actions?.["menu-2"]?.(); }}>
       <Menu aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Menu</span>
       </a>
-      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#options" data-action-id="options-3" onClick={(event) => { event.preventDefault(); actions?.["options-3"]?.(); }}>
+      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#options" aria-disabled="false" data-action-id="options-3" onClick={(event) => { event.preventDefault(); actions?.["options-3"]?.(); }}>
       <Circle aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Options</span>
       </a>
-      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#help" data-action-id="button-5-5" onClick={(event) => { event.preventDefault(); actions?.["button-5-5"]?.(); }}>
+      <a className="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary-fixed-dim transition-colors" href="#help" aria-disabled="false" data-action-id="button-5-5" onClick={(event) => { event.preventDefault(); actions?.["button-5-5"]?.(); }}>
       <Circle aria-hidden={true} focusable="false" />
       <span className="text-label-sm font-label-sm">Help</span>
       </a>
