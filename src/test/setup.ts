@@ -1,9 +1,15 @@
 import '@testing-library/jest-dom/vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { createElement } from 'react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import App from '../App';
 import { GameOptionsSettings } from '../screens/GameOptionsSettings';
 import type { Difficulty, GameOptions } from '../types/domain';
+
+beforeEach(() => {
+  window.localStorage.clear();
+  globalThis.app = undefined;
+});
 
 describe('GameOptionsSettings', () => {
   it('updates option and difficulty handlers from controlled inputs before saving', () => {
@@ -122,5 +128,29 @@ describe('GameOptionsSettings', () => {
     expect(setDifficulty).toHaveBeenLastCalledWith('easy');
     expect(commitChanges).toHaveBeenCalledTimes(1);
     expect(screen.getByRole('status')).toHaveTextContent('Pulse 5.0x');
+  });
+});
+
+describe('App settings integration', () => {
+  it('opens settings with current app options and persists committed changes', async () => {
+    render(createElement(App));
+
+    act(() => {
+      globalThis.app?.actions.openSettings();
+    });
+
+    expect(await screen.findByRole('heading', { name: 'System_Options' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Signal propagation speed')).toHaveValue('2');
+    expect(screen.getByLabelText('Security clearance difficulty')).toHaveValue('medium');
+
+    fireEvent.click(screen.getByLabelText('Sound'));
+    fireEvent.change(screen.getByLabelText('Signal propagation speed'), { target: { value: '5' } });
+    fireEvent.change(screen.getByLabelText('Security clearance difficulty'), { target: { value: 'hard' satisfies Difficulty } });
+    fireEvent.click(screen.getByRole('button', { name: /commit_changes/i }));
+
+    expect(globalThis.app?.state.options.sound).toBe(false);
+    expect(globalThis.app?.state.options.pulseSpeed).toBe(5);
+    expect(globalThis.app?.state.difficulty).toBe('hard');
+    expect(window.localStorage.getItem('pulse-grid-state')).toContain('"difficulty":"hard"');
   });
 });

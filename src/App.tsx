@@ -196,7 +196,15 @@ export default function App() {
           {state.lastError}
         </div>
       )}
-      {state.currentScreen === 'settings' && <GameOptionsSettings actions={settingsActions} />}
+      {state.currentScreen === 'settings' && (
+        <GameOptionsSettings
+          actions={settingsActions}
+          difficulty={state.difficulty}
+          options={state.options}
+          setDifficulty={actions.setDifficulty}
+          updateOptions={actions.updateOptions}
+        />
+      )}
       {state.currentScreen === 'help' && <ControlsHelpHelp actions={helpActions} />}
       {state.currentScreen === 'pause' && <PauseOverlayOverlay actions={pauseActions} />}
       {state.currentScreen === 'gameOver' && <GameOverResult actions={gameOverActions} />}
