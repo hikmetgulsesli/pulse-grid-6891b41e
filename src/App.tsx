@@ -105,7 +105,7 @@ export default function App() {
   };
 
   const settingsActions = {
-    'button-1-1': () => undefined,
+    'button-1-1': actions.openSettings,
     'button-2-2': actions.openHelp,
     'execute-purge-3': actions.purgeProgress,
     'abort-4': actions.closeSettings,

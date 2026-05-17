@@ -95,6 +95,11 @@ export function GameOptionsSettings({ actions, options, difficulty, updateOption
     actions?.["commit-changes-5"]?.();
   };
 
+  const handleSettingsFocus = () => {
+    setCommitStatus("Settings panel active");
+    actions?.["button-1-1"]?.();
+  };
+
   return (
     <>
       {/* Subdued grid background element */}
@@ -103,7 +108,7 @@ export function GameOptionsSettings({ actions, options, difficulty, updateOption
       <header className="bg-surface dark:bg-surface border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-touch-target-min fixed top-0 z-50">
       <div className="text-headline-lg font-headline-lg font-bold tracking-tighter text-primary dark:text-primary uppercase">PULSE_GRID</div>
       <div className="flex items-center gap-2">
-      <button aria-label="Settings" className="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary-fixed transition-colors rounded-DEFAULT" type="button" data-action-id="button-1-1" onClick={actions?.["button-1-1"]}>
+      <button aria-label="Settings" className="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary-fixed transition-colors rounded-DEFAULT" type="button" data-action-id="button-1-1" onClick={handleSettingsFocus}>
       <Settings aria-hidden={true} focusable="false" />
       </button>
       <button aria-label="Help" className="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary-fixed transition-colors rounded-DEFAULT" type="button" data-action-id="button-2-2" onClick={actions?.["button-2-2"]}>
